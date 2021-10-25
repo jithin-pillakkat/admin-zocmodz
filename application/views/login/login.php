@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/images/favicon.png') ?>">
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="<?= base_url('assets/images/favicon.ico') ?>">
     <title>Admin ZocmodZ</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?= base_url('assets/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">

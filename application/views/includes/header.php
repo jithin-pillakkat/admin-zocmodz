@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/plugins/images/favicon.png') ?>">
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="<?= base_url('assets/images/favicon.ico') ?>">
     <title>Admin ZocmodZ</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?= base_url('assets/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
@@ -24,7 +24,7 @@
     <!--alerts CSS -->
     <link href="<?= base_url('assets/plugins/bower_components/sweetalert/sweetalert.css') ?>" rel="stylesheet" type="text/css">
     <!-- jQuery -->
-<script src="<?= base_url('assets/plugins/bower_components/jquery/dist/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 </head>
 
 <body class="fix-header">
@@ -47,7 +47,7 @@
                     <a class="logo" href="index.html">
                         <b>
                             <img src="<?= base_url('assets/plugins/images/admin-logo.png') ?>" alt="home" class="dark-logo" />
-                            <img src="<?= base_url('assets/plugins/images/admin-logo-dark.png') ?>" alt="home" class="light-logo" />
+                            <img src="<?= base_url('assets/images/admin-logo-dark.png') ?>" alt="home" class="light-logo" />
                         </b>
                         <span class="hidden-xs">
                             <img src="<?= base_url('assets/plugins/images/admin-text.png') ?>" alt="home" class="dark-logo" />
@@ -62,7 +62,7 @@
 
                     <!-- .Task dropdown -->
                     <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-check-circle"></i>
+                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" > <i class="mdi mdi-check-circle"></i>
                             <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                         </a>
                         <ul class="dropdown-menu dropdown-tasks animated slideInUp">
@@ -124,7 +124,7 @@
 
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?= base_url('assets/images/admin-logo.png') ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?= $this->session->userdata('name') ?></b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown"><b class="hidden-xs"><?= $this->session->userdata('name') ?></b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
@@ -138,7 +138,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>                            
+                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                             <li role="separator" class="divider"></li>

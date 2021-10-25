@@ -17,22 +17,26 @@
 <script src="<?= base_url('assets/js/custom.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/bower_components/datatables/datatables.min.js') ?>"></script>
 <!-- Sweet-Alert  -->
-<script src="<?= base_url('assets/plugins/bower_components/sweetalert/sweetalert.min.js') ?>"></script>
+<!-- <script src="<?= base_url('assets/plugins/bower_components/sweetalert/sweetalert.min.js') ?>"></script> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(function() {
         $('.logout').click(function() {
-            swal({
+            Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to logout from admin panel!",
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3ec396',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, Log out'
-            }).then(function() {
-                window.location.href = '<?= base_url('logout') ?>';
-            });
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= base_url('logout') ?>';
+                }
+            })
         });
-    })
+    })    
 </script>
 </body>
 
