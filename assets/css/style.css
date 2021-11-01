@@ -5,3 +5,14 @@
     margin-top: 10px;
     margin-bottom: 0;
 }
+.checkbox, .radio {    
+    margin-top: 0px;    
+}
+.cart{
+    font-size: inherit;
+    font-weight: bold;
+    color: white;
+    background: #00aa3a;
+    border-radius: 25px;
+    padding: 2px 6px;;
+}

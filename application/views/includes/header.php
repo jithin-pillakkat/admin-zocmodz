@@ -23,6 +23,8 @@
     <link href="<?= base_url('assets/css/colors/megna-dark.css') ?>" id="theme" rel="stylesheet">
     <!--alerts CSS -->
     <link href="<?= base_url('assets/plugins/bower_components/sweetalert/sweetalert.css') ?>" rel="stylesheet" type="text/css">
+    <!-- toast CSS -->
+    <link href="<?= base_url('assets/plugins/bower_components/toast-master/css/jquery.toast.css') ?>" rel="stylesheet">
     <!-- jQuery -->
     <script src="<?= base_url('assets/plugins/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 </head>
@@ -56,54 +58,10 @@
                 </div>
                 <!-- /Logo -->
 
-                <!-- Search input and Toggle icon -->
+                <!-- Toggle icon -->
                 <ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
-
-                    <!-- .Task dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" > <i class="mdi mdi-check-circle"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 1</strong> <span class="pull-right text-muted">40% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 2</strong> <span class="pull-right text-muted">20% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"> <span class="sr-only">20% Complete</span> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 3</strong> <span class="pull-right text-muted">60% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"> <span class="sr-only">60% Complete (warning)</span> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#"> <strong>See All Tasks</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li><a href="<?= base_url('order')?>" class="waves-effect waves-light"><i class="mdi mdi-cart-outline fa-fw"></i><sup class="cart">4</sup></a></li>                    
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <!-- alert area     -->
@@ -140,8 +98,6 @@
                             <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                             <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
                             <li><a href="javascript:void(0)" class="logout"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -165,6 +121,9 @@
                 </div>
                 <ul class="nav" id="side-menu">
                     <li><a href="<?= base_url('dashboard') ?>" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
+                    <li><a href="<?= base_url('bike') ?>" class="waves-effect"><i class="mdi mdi-bike fa-fw"></i> <span class="hide-menu">Bike</span></a></li>
+                    <li><a href="<?= base_url('category') ?>" class="waves-effect"><i class="mdi mdi-format-indent-increase fa-fw"></i> <span class="hide-menu">Category</span></a></li>
+                    <li><a href="<?= base_url('subcategory') ?>" class="waves-effect"><i class="mdi mdi-format-indent-increase fa-fw"></i> <span class="hide-menu">Subcategory</span></a></li>
                     <li><a href="<?= base_url('product') ?>" class="waves-effect"><i class="mdi mdi-ticket-percent fa-fw"></i> <span class="hide-menu">Product</span></a></li>
                     <li><a href="javascript:void(0)" class="waves-effect logout"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
                     <li class="devider"></li>

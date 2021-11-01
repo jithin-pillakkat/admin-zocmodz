@@ -64,7 +64,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Category</label>
-                                            <select class="form-control" data-placeholder="Choose a Category" tabindex="1">
+                                            <select class="form-control">
                                                 <option value="Category 1">Category 1</option>
                                                 <option value="Category 2">Category 2</option>
                                                 <option value="Category 3">Category 5</option>

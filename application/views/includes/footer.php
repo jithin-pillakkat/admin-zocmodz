@@ -13,12 +13,15 @@
 <script src="<?= base_url('assets/js/jquery.slimscroll.js') ?>"></script>
 <!--Wave Effects -->
 <script src="<?= base_url('assets/js/waves.js') ?>"></script>
+<!-- toast -->
+<script src="<?= base_url('assets/plugins/bower_components/toast-master/js/jquery.toast.js') ?>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<?= base_url('assets/js/custom.min.js') ?>"></script>
+
 <script src="<?= base_url('assets/plugins/bower_components/datatables/datatables.min.js') ?>"></script>
 <!-- Sweet-Alert  -->
-<!-- <script src="<?= base_url('assets/plugins/bower_components/sweetalert/sweetalert.min.js') ?>"></script> -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(function() {
         $('.logout').click(function() {
@@ -36,6 +39,7 @@
                 }
             })
         });
+        
     })    
 </script>
 </body>
