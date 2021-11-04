@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-info">
-                <div class="panel-heading"> ADD CATEGORY <a href="<?= base_url('category') ?>" class="btn btn-default pull-right">BACK</a></div>
+                <div class="panel-heading"> ADD CATEGORY <button type="button" onclick="window.location.href='<?= base_url('category') ?>'" class="btn btn-default pull-right">BACK</button></div>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                     <div class="panel-body">
                         <form action="<?= base_url('category/store') ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -25,7 +25,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Category Name</label>
+                                            <label class="control-label">Category Name *</label>
                                             <input type="text" class="form-control" name="title" value="<?= set_value('title'); ?>" placeholder="Category Name">
                                             <?= form_error('title', '<span class="help-block">', '</span>'); ?>
                                         </div>
@@ -33,7 +33,7 @@
                                     <!--/span-->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Image<sup class="text-danger">* 520X410</sup></label>
+                                            <label class="control-label">Image *<sup class="text-danger"> 520X410</sup></label>
                                             <input type="file" class="form-control" name="image" placeholder="Category Image">
                                             <?= form_error('image', '<span class="help-block">', '</span>'); ?>
                                         </div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                <a href="<?= base_url('category/create')?>" class="btn btn-default">Cancel</a>
+                                <button type="button" onclick="window.location.href='<?= base_url('category/create')?>'" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
                     </div>

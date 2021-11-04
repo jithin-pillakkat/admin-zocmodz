@@ -5,7 +5,7 @@
         </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="<?= base_url('dashboard')?>">Dashboard</a></li>
+                <li><a href="#">Dashboard</a></li>
                 <li class="active">Product</li>
             </ol>
         </div>
@@ -15,18 +15,16 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
-                <h3 class="box-title m-b-30">PRODUCT <a href="<?= base_url('product/create')?>" class="btn btn-info pull-right">ADD</a></h3>
+                <h3 class="box-title m-b-30">Data Table <a href="<?= base_url('product/create')?>" class="btn btn-info pull-right">ADD</a></h3>
 
                 <div class="table-responsive">
                     <table id="myTable" class="table table-hover color-bordered-table info-bordered-table">
                         <thead>
                             <tr>
-                                <th>NO</th>
-                                <th>CATEGORY</th>
-                                <th>SUBCATEGORY</th>
-                                <th>PRODUCT</th>
-                                <th>IMAGE</th>
-                                <th>STATUS</th>
+                                <th>NAME</th>
+                                <th>POSITION</th>
+                                <th>OFFICE</th>
+                                <th>AGE</th>
                                 <th>CREATED DATE</th>
                                 <th>MANAGE</th>
                             </tr>
@@ -34,11 +32,9 @@
                         <tbody>
                             <?php for ($i = 0; $i < 20; $i++) : ?>
                                 <tr>
-                                    <td>1</td>
+                                    <td>Tiger Nixon</td>
                                     <td>System Architect</td>
                                     <td>Edinburgh</td>
-                                    <td>Tiger Nixon</td> 
-                                    <td>Tiger Nixon</td>                                    
                                     <td>61</td>
                                     <td>2011/04/25</td>
                                     <td>

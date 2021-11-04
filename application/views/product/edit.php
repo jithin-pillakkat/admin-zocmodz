@@ -5,9 +5,9 @@
         </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Product</a></li>
-                <li class="active">Edit</li>
+                <li><a href="<?= base_url('dashboard')?>">Dashboard</a></li>
+                <li><a href="<?= base_url('product')?>">Product</a></li>
+                <li class="active">Add</li>
             </ol>
         </div>
         <!-- /.col-lg-12 -->
@@ -16,56 +16,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-info">
-                <div class="panel-heading"> EDIT PRODUCT <a href="<?= base_url('product')?>" class="btn btn-default pull-right">BACK</a></div>
+                <div class="panel-heading"> EDIT PRODUCT <button type="button" class="btn btn-default pull-right" onclick="window.location.href='<?= base_url('product')?>'">BACK</button></div>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                     <div class="panel-body">
                         <form action="#">
-                            <div class="form-body">
-                                <h3 class="box-title">Person Info</h3>
-                                <hr>
-                                <div class="row">
+                            <div class="form-body">  
+                            <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">First Name</label>
-                                            <input type="text" id="firstName" class="form-control" placeholder="John doe"> <span class="help-block"> This is inline help </span>
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                    <div class="col-md-6">
-                                        <div class="form-group has-error">
-                                            <label class="control-label">Last Name</label>
-                                            <input type="text" id="lastName" class="form-control" placeholder="12n"> <span class="help-block"> This field has error. </span>
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Gender</label>
+                                    <div class="form-group">
+                                            <label class="control-label">Category *</label>
                                             <select class="form-control">
-                                                <option value="">Male</option>
-                                                <option value="">Female</option>
-                                            </select> <span class="help-block"> Select your gender </span>
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Date of Birth</label>
-                                            <input type="text" class="form-control" placeholder="dd/mm/yyyy">
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Category</label>
-                                            <select class="form-control" data-placeholder="Choose a Category" tabindex="1">
-                                                <option value="Category 1">Category 1</option>
+                                                <option value="">Select Category</option>
                                                 <option value="Category 2">Category 2</option>
                                                 <option value="Category 3">Category 5</option>
                                                 <option value="Category 4">Category 4</option>
@@ -74,79 +35,118 @@
                                     </div>
                                     <!--/span-->
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Membership</label>
-                                            <div class="radio-list">
-                                                <label class="radio-inline p-0">
-                                                    <div class="radio radio-info">
-                                                        <input type="radio" name="radio" id="radio1" value="option1">
-                                                        <label for="radio1">Option 1</label>
-                                                    </div>
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <div class="radio radio-info">
-                                                        <input type="radio" name="radio" id="radio2" value="option2">
-                                                        <label for="radio2">Option 2 </label>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <h3 class="box-title m-t-40">Address</h3>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12 ">
-                                        <div class="form-group">
-                                            <label>Street</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>City</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>State</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Post Code</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <!--/span-->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Country</label>
+                                    <div class="form-group">
+                                            <label class="control-label">Subcategory *</label>
                                             <select class="form-control">
-                                                <option>--Select your Country--</option>
-                                                <option>India</option>
-                                                <option>Sri Lanka</option>
-                                                <option>USA</option>
+                                                <option value="">Select Subcategory</option>
+                                                <option value="Category 2">Category 2</option>
+                                                <option value="Category 3">Category 3</option>
+                                                <option value="Category 4">Category 4</option>
                                             </select>
                                         </div>
                                     </div>
                                     <!--/span-->
                                 </div>
+                                <!--/row-->                              
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Product Name *</label>
+                                            <input type="text" class="form-control" placeholder="Product Name">
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Quantity *</label>
+                                            <input type="text" class="form-control" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Price *</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">₹</div>
+                                                <input type="text" class="form-control" placeholder="Price in ₹">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Discount</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">%</div>
+                                                <input type="text" class="form-control" placeholder="Discount in %">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->                                    
+                                </div>
+                                <!-- /row -->
+                                
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="form-group">
+                                        <label>Product Description *</label>
+                                            <textarea class="form-control" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/row-->                                
+
+                                <div class="row">                                    
+                                    <div class="col-md-3">
+                                        <h3 class="box-title text-center m-t-20">Image 1</h3>
+                                        <div class="product-img"> <img src="../assets/plugins/images/chair.jpg">
+                                            <div class="pro-img-overlay">                                                
+                                                <a href="javascript:void(0)" class="bg-danger"><i class="ti-trash"></i></a></div>
+                                            <div class="fileupload btn btn-info waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Change Image</span>
+                                                <input type="file" class="upload">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 class="box-title text-center m-t-20">Image 2</h3>
+                                        <div class="product-img"> <img src="../assets/plugins/images/chair.jpg">
+                                            <div class="pro-img-overlay">                                                
+                                                <a href="javascript:void(0)" class="bg-danger"><i class="ti-trash"></i></a></div>
+                                            <div class="fileupload btn btn-info waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Change Image</span>
+                                                <input type="file" class="upload">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 class="box-title text-center m-t-20">Image 3</h3>
+                                        <div class="product-img"> <img src="../assets/plugins/images/chair.jpg">
+                                            <div class="pro-img-overlay">                                                 
+                                                <a href="javascript:void(0)" class="bg-danger"><i class="ti-trash"></i></a></div>
+                                            <div class="fileupload btn btn-info waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Change Image</span>
+                                                <input type="file" class="upload">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 class="box-title text-center m-t-20">Image 4</h3>
+                                        <div class="product-img"> <img src="../assets/plugins/images/chair.jpg">
+                                            <div class="pro-img-overlay">                                                 
+                                                <a href="javascript:void(0)" class="bg-danger"><i class="ti-trash"></i></a></div>
+                                            <div class="fileupload btn btn-info waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Change Image</span>
+                                                <input type="file" class="upload">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <!-- /row -->
                             </div>
-                            <div class="form-actions">
+                            <div class="form-actions m-t-40">
                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                <button type="button" class="btn btn-default">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick="window.location.href='<?= base_url('product/edit')?>'">Cancel</button>
                             </div>
                         </form>
                     </div>
