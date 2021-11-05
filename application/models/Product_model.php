@@ -15,12 +15,20 @@ class Product_model extends CI_Model
         return $query->result();
     }
 
+    public function getSubcategories($categoryId){
+        $this->db->select('id, title');
+        $this->db->where('category_id', $categoryId);
+        $this->db->order_by('title', 'ASC');
+        $query = $this->db->get('subcategories');
+        return $query->result();
+    }
+
     public function getProducts($search, $order, $order_column, $order_dir, $start, $length, $category_id, $subcategory_id, $draw)
     {
 
         $column = ["id", "title", "product_status"];
 
-        $query = "SELECT c.title as category, s.title as subcategory p.* FROM $this->table s JOIN categories c ON c.id = p.category_id JOIN subcategories s ON s.id = p.subcategory_id";
+        $query = "SELECT c.title as category, s.title as subcategory, p.* FROM $this->table p JOIN categories c ON c.id = p.category_id JOIN subcategories s ON s.id = p.subcategory_id";
         $query .= " WHERE ";
 
         if($category_id>0){
@@ -62,7 +70,7 @@ class Product_model extends CI_Model
             $nestedData[] = $row->category;
             $nestedData[] = $row->subcategory;
             $nestedData[] = $row->title;
-            $nestedData[] = "<img src='" . base_url('uploads/product/' . $row->image) . "' alt='Product Image' width='100' height='50'>";
+            $nestedData[] = "<img src='" . base_url('uploads/product/' . $row->image_1) . "' alt='Product Image' width='100' height='50'>";
             $nestedData[] = "<div class='checkbox checkbox-success'><input class='changeStatus'  type='checkbox' $status   name='status' data-id='".$row->id."' data-status='".$row->product_status."' ><label></label></div>";
             $nestedData[] = date('Y-m-d h:i a', strtotime($row->created_at));
             $nestedData[] = "<a href='" . base_url('product/edit/' . $row->id . '') . "' class='btn btn-info btn-outline btn-circle btn-lg m-r-5' title='Edit'><i class='ti-pencil-alt'></i></a>
@@ -111,19 +119,21 @@ class Product_model extends CI_Model
         return true;
     }
 
-    public function checkExist($categoryId, $title) 
+    public function checkExist($categoryId, $subcategoryId, $title) 
     {
         $this->db->where('title', $title);        
-        $this->db->where('category_id', $categoryId);        
+        $this->db->where('category_id', $categoryId);  
+        $this->db->where('subcategory_id', $subcategoryId);        
         $query = $this->db->get($this->table); 
         return $query->num_rows();
     }
 
-    public function checkExistEdit($id, $categoryId, $title) 
+    public function checkExistEdit($id, $categoryId, $subcategoryId, $title) 
     {
         $this->db->where('title', $title);
         $this->db->where_not_in('id', $id); 
-        $this->db->where_not_in('category_id', $categoryId);        
+        $this->db->where_not_in('category_id', $categoryId);   
+        $this->db->where_not_in('subcategory_id', $subcategoryId);     
         $query = $this->db->get($this->table); 
         return $query->num_rows();
     }
