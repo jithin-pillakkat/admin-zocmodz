@@ -45,8 +45,8 @@ class Bike_model extends CI_Model
             $nestedData[] = "<img src='" . base_url('uploads/bike/' . $row->image) . "' alt='Bike Image' width='100' height='50'>";
             $nestedData[] = "<div class='checkbox checkbox-success'><input class='changeStatus'  type='checkbox' $status   name='status' data-id='".$row->id."' data-status='".$row->bike_status."' ><label></label></div>";
             $nestedData[] = date('Y-m-d h:i a', strtotime($row->created_at));
-            $nestedData[] = "<a href='" . base_url('bike/edit/' . $row->id . '') . "' class='btn btn-info btn-outline btn-circle btn-lg m-r-5' title='Edit'><i class='ti-pencil-alt'></i></a>
-                            <button type='button' class='btn btn-info btn-outline btn-circle btn-lg m-r-5 deleteButton' title='Delete' data-id='".$row->id."'><i class='icon-trash'></i></button>";
+            $nestedData[] = "<a href='" . base_url('bike/edit/' . $row->id . '') . "' class='btn btn-info btn-outline btn-circle m-r-5' title='Edit'><i class='ti-pencil-alt'></i></a>
+                            <button type='button' class='btn btn-info btn-outline btn-circle m-r-5 deleteButton' title='Delete' data-id='".$row->id."'><i class='icon-trash'></i></button>";
 
             $data[] = $nestedData;
         }

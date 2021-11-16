@@ -118,7 +118,8 @@
                                     icon: 'success',
                                     hideAfter: 3700
                                 });
-                                dataTable.ajax.reload();
+                                $('#dataTable').DataTable().destroy();
+                                loadData();
                             } else {
                                 $.toast({
                                     heading: response.status,

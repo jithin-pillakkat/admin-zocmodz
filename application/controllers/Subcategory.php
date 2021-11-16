@@ -8,6 +8,7 @@ class Subcategory extends CI_Controller
 		parent::__construct();
 		$this->controller = strtolower(__CLASS__);
 		$this->load->model('Subcategory_model', 'subcategory');
+		$this->load->model('Product_model', 'product');
 	}
 
 	public function index()
@@ -106,6 +107,26 @@ class Subcategory extends CI_Controller
 		} else {
 			$id = $this->input->get('id');
 			$data = $this->subcategory->getSubcategory($id);
+			
+			// Delete products under this subcategory
+			$products = $this->subcategory->getProducts($id);
+			foreach($products as $product){
+				if($product->image_1){
+					unlink(FCPATH . 'uploads/product/' . $product->image_1);
+				}
+				if($product->image_2){
+					unlink(FCPATH . 'uploads/product/' . $product->image_2);
+				}
+				if($product->image_3){
+					unlink(FCPATH . 'uploads/product/' . $product->image_3);
+				}
+				if($product->image_4){
+					unlink(FCPATH . 'uploads/product/' . $product->image_4);
+				}
+
+				$this->product->destroy($product->id);
+			}
+
 			unlink(FCPATH . 'uploads/subcategory/' . $data->image);
 			$destroy = $this->subcategory->destroy($id);
 			if ($destroy) {

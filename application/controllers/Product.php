@@ -7,42 +7,44 @@ class Product extends CI_Controller
 	{
 		parent::__construct();
 		$this->controller = strtolower(__CLASS__);
-		
+
 		$this->load->model('Product_model', 'product');
 	}
 
 	public function index()
-	{	
-		$data['categories'] = $this->product->getCategories();		
-        $this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/{$this->controller}", $data);
+	{
+		$data['categories'] = $this->product->getCategories();
+		$this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/{$this->controller}", $data);
 	}
 
-    public function create()
-	{	
-		$data['categories'] = $this->product->getCategories();		
-        $this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/".__FUNCTION__, $data);
+	public function create()
+	{
+		$data['categories'] = $this->product->getCategories();
+		$data['gsts'] = $this->product->getGsts();
+		$this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/" . __FUNCTION__, $data);
 	}
 
-    public function store()
-	{	
+	public function store()
+	{
 		$this->form_validation->set_rules('category_id', 'Category Name', 'required');
 		$this->form_validation->set_rules('subcategory_id', 'Subcategory Name', 'required');
 		$this->form_validation->set_rules('title', 'Product Name', 'required|min_length[3]|max_length[100]|callback_checkExist');
 		$this->form_validation->set_rules('quantity', 'Product Quantity', 'required|numeric');
 		$this->form_validation->set_rules('price', 'Product Price', 'required|numeric');
 		$this->form_validation->set_rules('discount', 'Product Discount', 'required|is_natural');
+		$this->form_validation->set_rules('gst', 'GST Percentage', 'required');
 		$this->form_validation->set_rules('description', 'Product Description', 'required|min_length[3]');
 		$this->form_validation->set_rules('image_1', '', 'callback_fileCheck_1');
-		if($_FILES['image_2']['name']){
+		if ($_FILES['image_2']['name']) {
 			$this->form_validation->set_rules('image_2', '', 'callback_fileCheck_2');
 		}
-		if($_FILES['image_3']['name']){
+		if ($_FILES['image_3']['name']) {
 			$this->form_validation->set_rules('image_3', '', 'callback_fileCheck_3');
 		}
-		if($_FILES['image_4']['name']){
+		if ($_FILES['image_4']['name']) {
 			$this->form_validation->set_rules('image_4', '', 'callback_fileCheck_4');
 		}
-		
+
 		if ($this->form_validation->run() == FALSE) {
 			$this->create();
 		} else {
@@ -53,50 +55,51 @@ class Product extends CI_Controller
 			$data['quantity'] = $this->security->xss_clean($this->input->post('quantity'));
 			$data['price'] = $this->security->xss_clean($this->input->post('price'));
 			$data['discount'] = $this->security->xss_clean($this->input->post('discount'));
+			$data['gst'] = $this->security->xss_clean($this->input->post('gst'));
 			$data['description'] = $this->security->xss_clean($this->input->post('description'));
 
-			if($data['discount'] > 0){
+			if ($data['discount'] > 0) {
 				$discountAmount = ($data['price'] * $data['discount']) / 100;
 				$data['app_price'] = $data['price'] - $discountAmount;
-			}else{
+			} else {
 				$data['app_price'] = $data['price'];
 			}
-			 
+
 
 			$ext = pathinfo($_FILES['image_1']['name'], PATHINFO_EXTENSION);
-			$image_1 = $data['slug'] . '.' . $ext;
+			$image_1 = $data['slug'] . time() . '_1.' . $ext;
 			$uplPath = FCPATH . 'uploads/product/';
 			$uploadPath = $uplPath . $image_1;
 			move_uploaded_file($_FILES['image_1']['tmp_name'], $uploadPath);
 			$data['image_1'] = $image_1;
 
-			if($_FILES['image_2']['name']){
+			if ($_FILES['image_2']['name']) {
 				$ext = pathinfo($_FILES['image_2']['name'], PATHINFO_EXTENSION);
-				$image_2 = $data['slug'] . '_2.' . $ext;
+				$image_2 = $data['slug'] . time() . '_2.' . $ext;
 				$uplPath = FCPATH . 'uploads/product/';
 				$uploadPath = $uplPath . $image_2;
 				move_uploaded_file($_FILES['image_2']['tmp_name'], $uploadPath);
 				$data['image_2'] = $image_2;
 			}
-			
-			if($_FILES['image_3']['name']){
+
+			if ($_FILES['image_3']['name']) {
 				$ext = pathinfo($_FILES['image_3']['name'], PATHINFO_EXTENSION);
-				$image_3 = $data['slug'] . '_3.' . $ext;
+				$image_3 = $data['slug'] . time() . '_3.' . $ext;
 				$uplPath = FCPATH . 'uploads/product/';
 				$uploadPath = $uplPath . $image_3;
 				move_uploaded_file($_FILES['image_3']['tmp_name'], $uploadPath);
 				$data['image_3'] = $image_3;
 			}
-			
-			if($_FILES['image_4']['name']){
+
+			if ($_FILES['image_4']['name']) {
 				$ext = pathinfo($_FILES['image_4']['name'], PATHINFO_EXTENSION);
-				$image_4 = $data['slug'] . '_4.' . $ext;
+				$image_4 = $data['slug'] . time() . '_4.' . $ext;
 				$uplPath = FCPATH . 'uploads/product/';
 				$uploadPath = $uplPath . $image_4;
 				move_uploaded_file($_FILES['image_4']['tmp_name'], $uploadPath);
-				$data['image_4'] = $image_1;
+				$data['image_4'] = $image_4;
 			}
-			
+
 
 
 
@@ -109,22 +112,167 @@ class Product extends CI_Controller
 				return redirect($this->create());
 			}
 		}
-        
 	}
 
-    public function edit()
-	{	
-        $this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/".__FUNCTION__);
+	public function edit($id)
+	{
+		$data['product'] = $this->product->getProduct($id);
+		$data['categories'] = $this->product->getCategories();
+		$data['gsts'] = $this->product->getGsts();
+		$data['subcategories'] = $this->product->getSubcategories($data['product']->category_id);
+		$this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/" . __FUNCTION__, $data);
 	}
 
-    public function update()
-	{	
-        
+	public function update()
+	{
+		$id = $this->input->post('id');
+		$himage_1 = $this->input->post('himage_1');
+		$himage_2 = $this->input->post('himage_2');
+		$himage_3 = $this->input->post('himage_3');
+		$himage_4 = $this->input->post('himage_4');
+
+		$this->form_validation->set_rules('category_id', 'Category Name', 'required');
+		$this->form_validation->set_rules('subcategory_id', 'Subcategory Name', 'required');
+		$this->form_validation->set_rules('title', 'Product Name', 'required|min_length[3]|max_length[100]|callback_checkExistEdit');
+		$this->form_validation->set_rules('quantity', 'Product Quantity', 'required|numeric');
+		$this->form_validation->set_rules('price', 'Product Price', 'required|numeric');
+		$this->form_validation->set_rules('discount', 'Product Discount', 'required|is_natural');
+		$this->form_validation->set_rules('description', 'Product Description', 'required|min_length[3]');
+
+		if ($_FILES['image_1']['name'] != '') {
+			$this->form_validation->set_rules('image_1', '', 'callback_fileCheck_1');
+		}
+		if ($_FILES['image_2']['name'] != '') {
+			$this->form_validation->set_rules('image_2', '', 'callback_fileCheck_2');
+		}
+		if ($_FILES['image_3']['name'] != '') {
+			$this->form_validation->set_rules('image_3', '', 'callback_fileCheck_3');
+		}
+		if ($_FILES['image_4']['name'] != '') {
+			$this->form_validation->set_rules('image_4', '', 'callback_fileCheck_4');
+		}
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->edit($id);
+		} else {
+			$data['category_id'] = $this->security->xss_clean($this->input->post('category_id'));
+			$data['subcategory_id'] = $this->security->xss_clean($this->input->post('subcategory_id'));
+			$data['title'] = $this->security->xss_clean($this->input->post('title'));
+			$data['slug'] = $this->security->xss_clean(url_title($data['title'], 'dash', true));
+			$data['quantity'] = $this->security->xss_clean($this->input->post('quantity'));
+			$data['price'] = $this->security->xss_clean($this->input->post('price'));
+			$data['discount'] = $this->security->xss_clean($this->input->post('discount'));
+			$data['gst'] = $this->security->xss_clean($this->input->post('gst'));
+			$data['description'] = $this->security->xss_clean($this->input->post('description'));
+
+			if ($data['discount'] > 0) {
+				$discountAmount = ($data['price'] * $data['discount']) / 100;
+				$data['app_price'] = $data['price'] - $discountAmount;
+			} else {
+				$data['app_price'] = $data['price'];
+			}
+
+			// change image 1
+			if ($_FILES['image_1']['name'] != '') {
+				// remove old image
+				if ($himage_1) {
+					unlink(FCPATH . 'uploads/product/' . $himage_1);
+				}
+
+				$ext = pathinfo($_FILES['image_1']['name'], PATHINFO_EXTENSION);
+				$image_1 = $data['slug'] . time() . '_1.' . $ext;
+				$uplPath = FCPATH . 'uploads/product/';
+				$uploadPath = $uplPath . $image_1;
+				move_uploaded_file($_FILES['image_1']['tmp_name'], $uploadPath);
+
+				$data['image_1'] = $image_1;
+			}
+
+			// change image 2
+			if ($_FILES['image_2']['name'] != '') {
+				// remove old image
+				if ($himage_2) {
+					unlink(FCPATH . 'uploads/product/' . $himage_2);
+				}
+
+				$ext = pathinfo($_FILES['image_2']['name'], PATHINFO_EXTENSION);
+				$image_2 = $data['slug'] . time() . '_2.' . $ext;
+				$uplPath = FCPATH . 'uploads/product/';
+				$uploadPath = $uplPath . $image_2;
+				move_uploaded_file($_FILES['image_2']['tmp_name'], $uploadPath);
+
+				$data['image_2'] = $image_2;
+			}
+
+			if ($_FILES['image_3']['name'] != '') {
+				// remove old image
+				if ($himage_1) {
+					unlink(FCPATH . 'uploads/product/' . $himage_3);
+				}
+
+				$ext = pathinfo($_FILES['image_3']['name'], PATHINFO_EXTENSION);
+				$image_3 = $data['slug'] . time() . '.' . $ext;
+				$uplPath = FCPATH . 'uploads/product/';
+				$uploadPath = $uplPath . $image_3;
+				move_uploaded_file($_FILES['image_3']['tmp_name'], $uploadPath);
+
+				$data['image_3'] = $image_3;
+			}
+
+			if ($_FILES['image_4']['name'] != '') {
+				// remove old image
+				if ($himage_4) {
+					unlink(FCPATH . 'uploads/product/' . $himage_4);
+				}
+
+				$ext = pathinfo($_FILES['image_4']['name'], PATHINFO_EXTENSION);
+				$image_4 = $data['slug'] . time() . '_4.' . $ext;
+				$uplPath = FCPATH . 'uploads/product/';
+				$uploadPath = $uplPath . $image_4;
+				move_uploaded_file($_FILES['image_4']['tmp_name'], $uploadPath);
+
+				$data['image_4'] = $image_4;
+			}
+
+
+			$update = $this->product->update($data, $id);
+			if ($update) {
+				$this->session->set_flashdata('success', 'Data updated successfully.');
+				return redirect($this->controller);
+			} else {
+				$this->session->set_flashdata('error', 'Data updation failed, please try again!');
+				return redirect($this->edit($id));
+			}
+		}
 	}
 
-    public function destroy()
-	{	
-        
+	public function destroy()
+	{
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		} else {
+			$id = $this->input->get('id');
+			$data = $this->product->getProduct($id);
+			if ($data->image_1) {
+				unlink(FCPATH . 'uploads/product/' . $data->image_1);
+			}
+			if ($data->image_2) {
+				unlink(FCPATH . 'uploads/product/' . $data->image_2);
+			}
+			if ($data->image_3) {
+				unlink(FCPATH . 'uploads/product/' . $data->image_3);
+			}
+			if ($data->image_4) {
+				unlink(FCPATH . 'uploads/product/' . $data->image_4);
+			}
+
+			$destroy = $this->product->destroy($id);
+			if ($destroy) {
+				echo json_encode(['status' => 'success', 'message' => 'Data deleted successfully.']);
+			} else {
+				echo json_encode(['status' => 'error', 'message' => 'Somthing went wrong']);
+			}
+		}
 	}
 
 	public function table()
@@ -155,15 +303,15 @@ class Product extends CI_Controller
 			$start = $_GET['start'];
 			$length = $_GET['length'];
 
-			if(isset($_GET['category_id'])){
-				$category_id = $_GET['category_id'];				
-			}else{
+			if (isset($_GET['category_id'])) {
+				$category_id = $_GET['category_id'];
+			} else {
 				$category_id = 0;
 			}
 
-			if(isset($_GET['subcategory_id'])){
-				$subcategory_id = $_GET['subcategory_id'];				
-			}else{
+			if (isset($_GET['subcategory_id'])) {
+				$subcategory_id = $_GET['subcategory_id'];
+			} else {
 				$subcategory_id = 0;
 			}
 
@@ -199,16 +347,17 @@ class Product extends CI_Controller
 		}
 	}
 
-	public function getSubcategories(){
+	public function getSubcategories()
+	{
 		if (!$this->input->is_ajax_request()) {
 			exit('No direct script access allowed');
 		} else {
 			$categoryId = $this->input->get('categoryId');
 			$subcategories = $this->product->getSubcategories($categoryId);
 			$data = '<option value="">Select Subcategory</option>';
-			foreach($subcategories as $subcategory){
-				$selected = (set_value('subcategory_id')== $subcategory->id) ? 'selected' : '';
-				$data.= '<option value="'.$subcategory->id.'" '.$selected.'>'.$subcategory->title.'</option>'; 
+			foreach ($subcategories as $subcategory) {
+				$selected = (set_value('subcategory_id') == $subcategory->id) ? 'selected' : '';
+				$data .= '<option value="' . $subcategory->id . '" ' . $selected . '>' . $subcategory->title . '</option>';
 			}
 			echo $data;
 		}
@@ -325,10 +474,10 @@ class Product extends CI_Controller
      * check exist during validation
      */
 	function checkExist($title)
-	{		
+	{
 		$categoryId = $this->input->post('category_id');
 		$subcategoryId = $this->input->post('subcategory_id');
-		$result = $this->product->checkExist($categoryId, $subcategoryId, $title);		
+		$result = $this->product->checkExist($categoryId, $subcategoryId, $title);
 		if ($result == 0)
 			return true;
 		else {
@@ -337,5 +486,20 @@ class Product extends CI_Controller
 		}
 	}
 
-	
+	/*
+     * check exist during edit validation
+     */
+	function checkExistEdit($title)
+	{
+		$id = $this->input->post('id');
+		$categoryId = $this->input->post('category_id');
+		$subcategoryId = $this->input->post('subcategory_id');
+		$result = $this->product->checkExistEdit($id, $categoryId, $subcategoryId, $title);
+		if ($result == 0)
+			return true;
+		else {
+			$this->form_validation->set_message('checkExistEdit', 'Product name must be unique under this categories');
+			return false;
+		}
+	}
 }

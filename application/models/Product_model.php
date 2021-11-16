@@ -15,6 +15,13 @@ class Product_model extends CI_Model
         return $query->result();
     }
 
+    public function getGsts(){
+        $this->db->select('id, gst');
+        $this->db->order_by('gst', 'ASC');
+        $query = $this->db->get('gsts');
+        return $query->result();
+    }
+
     public function getSubcategories($categoryId){
         $this->db->select('id, title');
         $this->db->where('category_id', $categoryId);
@@ -45,6 +52,7 @@ class Product_model extends CI_Model
 
         if (isset($search)) {
             $query .= '(p.title LIKE "%' . $search . '%")';
+            $query .= ' OR p.app_price LIKE "%' . $search . '%"';
         }
 
         if (!empty($order)) {
@@ -72,9 +80,10 @@ class Product_model extends CI_Model
             $nestedData[] = $row->title;
             $nestedData[] = "<img src='" . base_url('uploads/product/' . $row->image_1) . "' alt='Product Image' width='100' height='50'>";
             $nestedData[] = "<div class='checkbox checkbox-success'><input class='changeStatus'  type='checkbox' $status   name='status' data-id='".$row->id."' data-status='".$row->product_status."' ><label></label></div>";
+            $nestedData[] = "₹ ".$row->app_price;
             $nestedData[] = date('Y-m-d h:i a', strtotime($row->created_at));
-            $nestedData[] = "<a href='" . base_url('product/edit/' . $row->id . '') . "' class='btn btn-info btn-outline btn-circle btn-lg m-r-5' title='Edit'><i class='ti-pencil-alt'></i></a>
-                            <button type='button' class='btn btn-info btn-outline btn-circle btn-lg m-r-5 deleteButton' title='Delete' data-id='".$row->id."'><i class='icon-trash'></i></button>";
+            $nestedData[] = "<a href='" . base_url('product/edit/' . $row->id . '') . "' class='btn btn-info btn-outline btn-circle  m-r-5' title='Edit'><i class='ti-pencil-alt'></i></a>
+                            <button type='button' class='btn btn-info btn-outline btn-circle  m-r-5 deleteButton' title='Delete' data-id='".$row->id."'><i class='icon-trash'></i></button>";
 
             $data[] = $nestedData;
         }
@@ -132,9 +141,9 @@ class Product_model extends CI_Model
     {
         $this->db->where('title', $title);
         $this->db->where_not_in('id', $id); 
-        $this->db->where_not_in('category_id', $categoryId);   
-        $this->db->where_not_in('subcategory_id', $subcategoryId);     
-        $query = $this->db->get($this->table); 
+        $this->db->where('category_id', $categoryId);   
+        $this->db->where('subcategory_id', $subcategoryId);     
+        $query = $this->db->get($this->table);
         return $query->num_rows();
     }
     

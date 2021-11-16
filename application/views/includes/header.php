@@ -25,6 +25,7 @@
     <link href="<?= base_url('assets/plugins/bower_components/sweetalert/sweetalert.css') ?>" rel="stylesheet" type="text/css">
     <!-- toast CSS -->
     <link href="<?= base_url('assets/plugins/bower_components/toast-master/css/jquery.toast.css') ?>" rel="stylesheet">
+    
     <!-- jQuery -->
     <script src="<?= base_url('assets/plugins/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 </head>
@@ -46,7 +47,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="<?= base_url()?>">
                         <b>
                             <img src="<?= base_url('assets/plugins/images/admin-logo.png') ?>" alt="home" class="dark-logo" />
                             <img src="<?= base_url('assets/images/admin-logo-dark.png') ?>" alt="home" class="light-logo" />
@@ -125,6 +126,7 @@
                     <li><a href="<?= base_url('category') ?>" class="waves-effect"><i class="mdi mdi-format-indent-increase fa-fw"></i> <span class="hide-menu">Category</span></a></li>
                     <li><a href="<?= base_url('subcategory') ?>" class="waves-effect"><i class="mdi mdi-format-indent-increase fa-fw"></i> <span class="hide-menu">Subcategory</span></a></li>
                     <li><a href="<?= base_url('product') ?>" class="waves-effect"><i class="mdi mdi-ticket-percent fa-fw"></i> <span class="hide-menu">Product</span></a></li>
+                    <li><a href="<?= base_url('banner') ?>" class="waves-effect"><i class="mdi mdi-folder-multiple-image fa-fw"></i> <span class="hide-menu">Banner</span></a></li>
                     <li><a href="javascript:void(0)" class="waves-effect logout"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
                     <li class="devider"></li>
                 </ul>

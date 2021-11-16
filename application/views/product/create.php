@@ -89,6 +89,24 @@
                                 <!-- /row -->
 
                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>GST (%) *</label>
+                                            <select class="form-control" name="gst">
+                                                <option value="">Select GST</option>
+                                                <?php foreach ($gsts as $gst) : ?>
+                                                    <option value="<?= $gst->gst ?>" <?= (set_value('gst')==$gst->gst) ? 'selected' : ''; ?>><?= $gst->gst ?> %</option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <?= form_error('gst', '<span class="help-block">', '</span>'); ?>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    
+                                </div>
+                                <!-- /row -->
+
+                                <div class="row">
                                     <div class="col-md-12 ">
                                         <div class="form-group">
                                             <label>Product Description*</label>
@@ -102,7 +120,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Image 1 *</label>
+                                            <label>Image 1 * <sup class="text-danger"> 520X410</sup></label>
                                             <div class="input-group">
                                                 <input type="file" name="image_1" class="form-control">
                                                 <?= form_error('image_1', '<span class="help-block">', '</span>'); ?>
@@ -112,7 +130,7 @@
                                     <!--/span-->
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Image 2</label>
+                                            <label>Image 2 <sup class="text-danger"> 520X410</sup></label>
                                             <div class="input-group">
                                                 <input type="file" name="image_2" class="form-control">
                                                 <?= form_error('image_2', '<span class="help-block">', '</span>'); ?>
@@ -122,7 +140,7 @@
                                     <!--/span-->
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Image 3</label>
+                                            <label>Image 3 <sup class="text-danger"> 520X410</sup></label>
                                             <div class="input-group">
                                                 <input type="file" name="image_3" class="form-control">
                                                 <?= form_error('image_3', '<span class="help-block">', '</span>'); ?>
@@ -132,7 +150,7 @@
                                     <!--/span-->
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Image 4</label>
+                                            <label>Image 4 <sup class="text-danger"> 520X410</sup></label>
                                             <div class="input-group">
                                                 <input type="file" name="image_4" class="form-control">
                                                 <?= form_error('image_4', '<span class="help-block">', '</span>'); ?>

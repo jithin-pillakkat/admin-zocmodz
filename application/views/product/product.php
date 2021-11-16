@@ -38,6 +38,7 @@
                                 <th>PRODUCT</th>
                                 <th>IMAGE</th>
                                 <th>STATUS</th>
+                                <th>PRICE</th>
                                 <th>CREATED DATE</th>
                                 <th>MANAGE</th>
                             </tr>
@@ -147,7 +148,9 @@
                                     icon: 'success',
                                     hideAfter: 3700
                                 });
-                                dataTable.ajax.reload();
+                                // dataTable.ajax.reload();
+                                $('#dataTable').DataTable().destroy();
+                                loadData();
                             } else {
                                 $.toast({
                                     heading: response.status,
