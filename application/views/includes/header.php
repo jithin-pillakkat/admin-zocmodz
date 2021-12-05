@@ -91,12 +91,12 @@
                                     <div class="u-text">
                                         <h4><?= $this->session->userdata('name') ?></h4>
                                         <p class="text-muted"><?= $this->session->userdata('email') ?></p>
-                                        <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                        <a href="<?= base_url('profile')?>" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                     </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                            <li><a href="<?= base_url('profile')?>"><i class="ti-user"></i> My Profile</a></li>
                             <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="javascript:void(0)" class="logout"><i class="fa fa-power-off"></i> Logout</a></li>
@@ -127,6 +127,7 @@
                     <li><a href="<?= base_url('subcategory') ?>" class="waves-effect"><i class="mdi mdi-format-indent-increase fa-fw"></i> <span class="hide-menu">Subcategory</span></a></li>
                     <li><a href="<?= base_url('product') ?>" class="waves-effect"><i class="mdi mdi-ticket-percent fa-fw"></i> <span class="hide-menu">Product</span></a></li>
                     <li><a href="<?= base_url('banner') ?>" class="waves-effect"><i class="mdi mdi-folder-multiple-image fa-fw"></i> <span class="hide-menu">Banner</span></a></li>
+                    <li><a href="<?= base_url('newsletter') ?>" class="waves-effect"><i class="mdi mdi-bulletin-board fa-fw"></i> <span class="hide-menu">Newsletter</span></a></li>
                     <li><a href="javascript:void(0)" class="waves-effect logout"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
                     <li class="devider"></li>
                 </ul>

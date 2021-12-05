@@ -7,7 +7,7 @@ class Login extends CI_Controller
 	{
 		parent::__construct();
 		$this->controller = strtolower(__CLASS__);
-		$this->load->model('Login_model', 'login');
+		$this->load->model('Admin_model', 'admin');
 		if($this->session->userdata('user_id')){
 			redirect('dashboard');
 		}
@@ -31,7 +31,7 @@ class Login extends CI_Controller
 				$errors['password'] = form_error('password', '<span class="help-block password">', '</span>');
 				echo json_encode(['status' => $errors]);
 			}else{
-				$user = $this->login->login($this->input->post('email'), $this->input->post('password'));
+				$user = $this->admin->login($this->input->post('email'), $this->input->post('password'));
 				if($user){
 					$this->session->set_userdata(['user_id' => $user->id, 'email' => $user->email, 'name' => $user->name]);
 					$this->session->set_flashdata('success', "Hi $user->name, Welcome to zocmodz admin area...");
