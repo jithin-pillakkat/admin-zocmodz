@@ -34,7 +34,18 @@
                                     <!--/span-->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Image *<sup class="text-danger"> 1555X1005</sup></label>
+                                            <label class="control-label">Color Code*</label>
+                                            <input type="text" class="form-control" name="color_code" placeholder="Color Code">
+                                            <?= form_error('color_code', '<span class="help-block">', '</span>'); ?>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->  
+                                <div class="row">                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Image *<sup class="text-danger"> 1555X1000</sup></label>
                                             <input type="file" class="form-control" name="image" placeholder="Banner Image">
                                             <?= form_error('image', '<span class="help-block">', '</span>'); ?>
                                         </div>

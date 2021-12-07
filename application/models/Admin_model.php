@@ -30,4 +30,10 @@ class Admin_model extends CI_Model
         return false;
     }
 
+    public function get_socialmedia($id){
+        $this->db->where('id', $id);
+        $qry = $this->db->get('socialmedia');
+        return $qry->row('link');
+    }
+
 }

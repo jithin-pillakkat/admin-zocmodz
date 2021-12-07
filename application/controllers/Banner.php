@@ -11,7 +11,7 @@ class Banner extends CI_Controller
 	}
 
 	public function index()
-	{	
+	{			
 		$data['banners'] = $this->banner->getBanners();
         $this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/{$this->controller}", $data);
 	}
@@ -24,12 +24,15 @@ class Banner extends CI_Controller
     public function store()
 	{	
         $this->form_validation->set_rules('title', 'Banner Title', 'required|min_length[3]|max_length[50]');
+		$this->form_validation->set_rules('color_code', 'Color Code', 'required|max_length[50]');
 		$this->form_validation->set_rules('image', '', 'callback_fileCheck');
 		if ($this->form_validation->run() == FALSE) {
 			$this->create();
 		} else {
 			$data['title'] = $this->security->xss_clean($this->input->post('title'));
-			
+			$data['color_code'] = $this->security->xss_clean($this->input->post('color_code'));
+			$data['position'] = $this->banner->get_maxposition();
+
 			$ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 			$image = url_title($data['title'], 'dash', true) . '.' . $ext;
 			$uplPath = FCPATH . 'uploads/banner/';
@@ -68,13 +71,14 @@ class Banner extends CI_Controller
 			$this->edit($id);
 		} else {
 			$data['title'] = $this->security->xss_clean($this->input->post('title'));
+			$data['color_code'] = $this->security->xss_clean($this->input->post('color_code'));
 			
 			if ($_FILES['image']['name'] != '') {
 				// remove old image
 				unlink(FCPATH . 'uploads/banner/' . $himage);
 
 				$ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-				$image = $data['slug'] . '.' . $ext;
+				$image = url_title($data['title'], 'dash', true) . '.' . $ext;
 				$uplPath = FCPATH . 'uploads/banner/';
 				$uploadPath = $uplPath . $image;
 				move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath);
@@ -94,7 +98,20 @@ class Banner extends CI_Controller
 
     public function destroy()
 	{	
-        
+        if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		} else {
+			$id = $this->input->get('id');
+			$data = $this->banner->getBanner($id);
+
+			unlink(FCPATH . 'uploads/banner/' . $data->image);
+			$destroy = $this->banner->destroy($id);
+			if ($destroy) {
+				echo json_encode(['status' => 'success', 'message' => 'Data deleted successfully.']);
+			} else {
+				echo json_encode(['status' => 'error', 'message' => 'Somthing went wrong']);
+			}
+		}
 	}
 
 	public function changeStatus()
@@ -122,6 +139,34 @@ class Banner extends CI_Controller
 		}
 	}
 
+	public function position_down(){
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		} else {
+			$id = $this->input->get('id');			
+			$changePosition = $this->banner->position_down($id);
+			if ($changePosition) {
+				echo json_encode(['status' => 'success']);
+			} else {
+				echo json_encode(['status' => 'error']);
+			}
+		}
+	}
+
+	public function position_up(){
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		} else {
+			$id = $this->input->get('id');			
+			$changePosition = $this->banner->position_up($id);
+			if ($changePosition) {
+				echo json_encode(['status' => 'success']);
+			} else {
+				echo json_encode(['status' => 'error']);
+			}
+		}
+	}
+
 	/*
      * file value and type check during validation
      */
@@ -137,8 +182,8 @@ class Banner extends CI_Controller
 				}
 				$image_info = getimagesize($_FILES['image']['tmp_name']);
 				
-				if ($image_info[0] != 1555 || $image_info[1] != 1005 ) {
-					$this->form_validation->set_message('fileCheck', 'Please upload [width:1555 height:1005] image.');
+				if ($image_info[0] != 1555 || $image_info[1] != 1000 ) {
+					$this->form_validation->set_message('fileCheck', 'Please upload [width:1555 height:1000] image.');
 					return false;
 				}
 				return true;

@@ -12,7 +12,11 @@ class Profile extends CI_Controller
 
 	public function index()
 	{
-		$this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/{$this->controller}");
+		$data['twitter'] = $this->admin->get_socialmedia(1);
+		$data['facebook'] = $this->admin->get_socialmedia(2);
+		$data['instagram'] = $this->admin->get_socialmedia(3);
+		$data['youtube'] = $this->admin->get_socialmedia(4);
+		$this->layout->template(TEMPLATE_ADMIN)->show("{$this->controller}/{$this->controller}", $data);
 	}
 
 	public function update_profile()
@@ -104,7 +108,7 @@ class Profile extends CI_Controller
 				echo json_encode(['status' => $errors]);
 			} else {
 				$data = ['link' => $this->input->post('instagram')];
-				$update = $this->admin->update_socialmedia($data, 2);
+				$update = $this->admin->update_socialmedia($data, 3);
 				if ($update) {									
 					echo json_encode(['status' => 'success', 'message' => 'Link Updated successfully.']);
 				} else {
@@ -127,7 +131,7 @@ class Profile extends CI_Controller
 				echo json_encode(['status' => $errors]);
 			} else {
 				$data = ['link' => $this->input->post('youtube')];
-				$update = $this->admin->update_socialmedia($data, 2);
+				$update = $this->admin->update_socialmedia($data, 4);
 				if ($update) {									
 					echo json_encode(['status' => 'success', 'message' => 'Link Updated successfully.']);
 				} else {

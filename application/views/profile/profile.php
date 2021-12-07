@@ -66,7 +66,7 @@
                                 <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-info icon-width"><i class="fab fa-twitter"></i></button>
                                 </span>
-                                <input type="text" id="twitter" name="twitter" class="form-control" placeholder="Twitter">
+                                <input type="text" id="twitter" name="twitter" value="<?= $twitter?>" class="form-control" placeholder="Twitter">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-success" id="btn_twitter">Update</button>
                                 </span>
@@ -80,7 +80,7 @@
                                 <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-primary icon-width"><i class="fab fa-facebook-f"></i></button>
                                 </span>
-                                <input type="text" id="facebook" name="facebook" class="form-control" placeholder="Facebook"> <span class="input-group-btn">
+                                <input type="text" id="facebook" name="facebook" value="<?= $facebook?>" class="form-control" placeholder="Facebook"> <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-success" id="btn_facebook">Update</button>
                                 </span>
                             </div>
@@ -91,7 +91,7 @@
                                 <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-danger icon-width"><i class="fab fa-instagram"></i></button>
                                 </span>
-                                <input type="text" id="instagram" name="instagram" class="form-control" placeholder="Instagram"> <span class="input-group-btn">
+                                <input type="text" id="instagram" name="instagram" value="<?= $instagram?>" class="form-control" placeholder="Instagram"> <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-success" id="btn_instagram">Update</button>
                                 </span>
                             </div>
@@ -102,7 +102,7 @@
                                 <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-danger icon-width"><i class="fab fa-youtube"></i></button>
                                 </span>
-                                <input type="text" id="youtube" name="youtube" class="form-control" placeholder="Youtube"> <span class="input-group-btn">
+                                <input type="text" id="youtube" name="youtube" value="<?= $youtube?>" class="form-control" placeholder="Youtube"> <span class="input-group-btn">
                                     <button type="button" class="btn waves-effect waves-light btn-success" id="btn_youtube">Update</button>
                                 </span>
                             </div>
